@@ -25,3 +25,7 @@ function completeTask(tasks: Task[], id: number): Task[] {
 function filterByStatus(tasks: Task[], status: TaskStatus): Task[] {
   return tasks.filter((t) => t.status === status);
 }
+// Extra operation required by assignment
+function deleteTask(tasks: Task[], id: number): Task[] {
+  return tasks.filter((t) => t.id !== id);
+}
