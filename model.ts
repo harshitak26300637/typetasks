@@ -1,8 +1,9 @@
-// A status can only ever be one of these three exact strings.
-type TaskStatus = "todo" | "in-progress" | "done";
 
-// Every Task must have this exact shape.
-interface Task {
+// 1. TaskStatus literal union
+export type TaskStatus = "todo" | "in-progress" | "done";
+
+// 2. Task interface
+export interface Task {
   id: number;
   title: string;
   status: TaskStatus;
@@ -10,18 +11,29 @@ interface Task {
 
 let nextId = 1;
 
-// Add a new task — always starts as "todo".
-function addTask(tasks: Task[], title: string): Task[] {
-  const newTask: Task = { id: nextId++, title, status: "todo" };
+// 3. addTask operation
+export function addTask(tasks: Task[], title: string): Task[] {
+  const newTask: Task = {
+    id: nextId++,
+    title,
+    status: "todo",
+  };
   return [...tasks, newTask];
 }
 
-// Mark a task done by id.
-function completeTask(tasks: Task[], id: number): Task[] {
-  return tasks.map((t) => (t.id === id ? { ...t, status: "done" } : t));
+// 4. completeTask operation
+export function completeTask(tasks: Task[], id: number): Task[] {
+  return tasks.map((task) =>
+    task.id === id ? { ...task, status: "done" } : task
+  );
 }
 
-// Return only the tasks matching a given status.
-function filterByStatus(tasks: Task[], status: TaskStatus): Task[] {
-  return tasks.filter((t) => t.status === status);
+// 5. filterByStatus operation
+export function filterByStatus(tasks: Task[], status: TaskStatus): Task[] {
+  return tasks.filter((task) => task.status === status);
+}
+
+// 6. Extra operation required by assignment
+export function deleteTask(tasks: Task[], id: number): Task[] {
+  return tasks.filter((task) => task.id !== id);
 }
